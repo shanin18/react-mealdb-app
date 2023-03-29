@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../../images/logo.png"
+import logo from "../../images/logo.png";
+import profileImage from "../../images/profile.jpg"
 
 const Header = ({handleChange, inputText}) => {
 
@@ -23,7 +24,7 @@ const Header = ({handleChange, inputText}) => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="/public/profile.jpg" />
+              <img src= {profileImage}/>
             </div>
           </label>
           <ul
