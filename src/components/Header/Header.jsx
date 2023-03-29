@@ -1,15 +1,20 @@
 import React from "react";
+import logo from "../../images/logo.png"
 
-const Header = () => {
+const Header = ({handleChange, inputText}) => {
+
   return (
-    <div className="navbar bg-orange-400 py-4">
+    <div className="navbar bg-gray-600 py-2">
       <div className="container mx-auto justify-between flex-wrap gap-3">
-      <div>
-        <a className="font-bold text-2xl ">MealDB</a>
+      <div className="flex items-center gap-2">
+      <img className="w-20" src={logo} alt="" /> 
+        <a className="font-bold text-2xl text-white"> MealDB</a>
       </div>
       <div className="flex items-center gap-2">
         <div className="form-control">
           <input
+            onChange={handleChange}
+            value={inputText}
             type="text"
             placeholder="Search"
             className="rounded-full px-6 py-3 input"

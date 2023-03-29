@@ -2,8 +2,8 @@ import React, {useEffect, useState } from "react";
 import Cart from "../Cart/Cart";
 import Meal from "../Meal/Meal";
 
-const Menu = () => {
-  const [items, setItems] = useState([]);
+const Menu = ({inputText}) => {
+  const [meals, setMeals] = useState([]);
 
 //   set the name to the cart elements 
   const [names, setNames] = useState("");
@@ -18,32 +18,33 @@ const Menu = () => {
 
 //  creating new elements
   useEffect(()=>{
-    setElements([...elements, <p className=" font-semibold">{names}</p>]); 
+    setElements([...elements, <p key={elements.length} className=" font-semibold">{names}</p>]); 
 
   },[names]);
 
 //   fetching data
   useEffect(() => {
-    fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=chicken")
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputText}`)
       .then((res) => res.json())
-      .then((data) => setItems(data.meals));
-  }, []);
+      .then((data) => setMeals(data.meals));
+  }, [inputText]);
 
   return (
     <div className='mt-10 container mx-auto flex gap-4'>
       <div className="w-4/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-2">
-        {items.map((item) => (
+        
+        { meals?.map((meal) => (
           <Meal
-            item={item}
-            key={item.idMeal}
+            item={meal}
+            key={meal.idMeal}
             addToCart={addToCart}
           ></Meal>
         ))}
       </div>
 
-        <div className='w-1/5 border mr-2 px-3 rounded-xl'>
-          <Cart names={names} elements={elements} ></Cart>
-        </div>
+      <div className='w-1/5 border mr-2 px-3 rounded-xl h-[86vh]'>
+        <Cart names={names} elements={elements} ></Cart>
+      </div>
     </div>
   );
 };
